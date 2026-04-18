@@ -222,63 +222,58 @@ button:hover {
 #messages::-webkit-scrollbar { width: 3px; }
 #messages::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 10px; }
 
-/* --- MOBİL UYUMLULUK (RESPONSIVE) --- */
+/* --- MOBİL UYUMLULUK (TAM EKRAN FİX) --- */
 
 @media (max-width: 600px) {
-    #chat-card {
+    /* Sayfanın kendisinin kaymasını tamamen engelle */
+    html, body {
+        position: fixed;
+        overflow: hidden;
         width: 100%;
-        height: 100vh; /* Mobilde tam ekran */
-        border-radius: 0; /* Köşeleri mobilde sıfırla ki boşluk kalmasın */
+        height: 100%;
+        overscroll-behavior: none; /* iPhone'lardaki o zıplama efektini kapatır */
+    }
+
+    #chat-card {
+        width: 100vw;
+        /* dvh: Dynamic Viewport Height - Telefonun alt barına göre kendini ayarlar */
+        height: 100dvh; 
+        border-radius: 0;
         max-width: none;
+        border: none; /* Mobilde tam ekran olduğu için kenarlığa gerek yok */
     }
 
     #header {
-        padding: 15px 20px;
-    }
-
-    #header h2 {
-        font-size: 0.9rem; /* Mobilde başlığı biraz küçült */
-        letter-spacing: 3px;
+        padding: 10px 15px;
+        /* Safe area desteği: iPhone çentiği vb. için */
+        padding-top: calc(env(safe-area-inset-top) + 10px);
     }
 
     #messages {
         padding: 15px;
-        gap: 10px;
+        gap: 8px;
+        /* Mesajların kendi içinde kaymasına izin ver ama sayfanın kaymasına verme */
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .msg {
-        max-width: 90%; /* Mesajlar mobilde biraz daha geniş yer kaplayabilir */
-        font-size: 0.85rem;
-        padding: 10px 15px;
-    }
-
-    #input-area {
-        padding: 0 15px 20px 15px;
-        gap: 8px;
-    }
-
-    input[type="text"] {
-        padding: 12px 15px;
+        max-width: 85%;
         font-size: 0.9rem;
     }
 
-    button {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
+    #input-area {
+        /* Telefonun alt gezinme butonlarının (home bar) üzerine binmemesi için */
+        padding: 10px 15px calc(env(safe-area-inset-bottom) + 10px) 15px;
+        background: rgba(10, 10, 10, 0.8);
+        backdrop-filter: blur(10px);
     }
 
-    /* Ayarlar panelini mobilde tam genişlik yap */
     #settings-panel {
-        left: 15px;
-        right: 15px;
+        top: 70px;
+        left: 10px;
+        right: 10px;
+        width: auto;
         padding: 15px;
-    }
-}
-
-/* Klavye açıldığında input alanının kaybolmaması için ufak bir dokunuş */
-@media (max-height: 500px) {
-    #chat-card {
-        height: 100%;
     }
 }
