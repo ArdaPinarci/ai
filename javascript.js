@@ -1,6 +1,6 @@
 const API_KEY = "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"; 
 
-let charName = localStorage.getItem('charName') || "Lara";
+let charName = localStorage.getItem('charName') || "AI";
 let charPersonality = localStorage.getItem('charPersonality') || "Cilveli, zeki, sadık ve bazen hafif alaycı bir kız arkadaş.";
 
 document.getElementById('char-name-display').innerText = charName.toUpperCase();
@@ -34,7 +34,7 @@ async function sendMessage() {
     inputField.value = "";
 
     const loadingId = "loading-" + Date.now();
-    addMessage(charName, "Veri işleniyor...", "ai-msg", loadingId);
+    addMessage(charName, "Yaziyor...", "ai-msg", loadingId);
 
     // KİŞİSEL İMZA VE FİLTRESİZ YAPI
     const systemPrompt = `Senin adın ${charName}. Kullanıcının tutkulu partnerisin.
