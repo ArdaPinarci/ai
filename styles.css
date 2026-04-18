@@ -7,8 +7,9 @@
     --glass-border: rgba(255, 255, 255, 0.1);
 }
 
+/* Sadece Arka Plan Düzenlemesi */
 body {
-    background: var(--bg-dark);
+    background: #050505; /* Derin siyah temel */
     color: white;
     font-family: 'Inter', sans-serif;
     display: flex;
@@ -17,17 +18,28 @@ body {
     height: 100vh;
     margin: 0;
     overflow: hidden;
+    position: relative;
 }
 
+/* Arka plandaki loş neon ışıklar */
 body::before {
     content: "";
     position: absolute;
-    width: 60vw;
-    height: 60vw;
-    background: radial-gradient(circle, var(--neon-purple) 0%, transparent 60%);
-    filter: blur(120px);
-    opacity: 0.15;
+    width: 140vw;
+    height: 140vh;
+    /* Sol üstten vuran mor ve sağ alttan vuran mavi loş ışık */
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(157, 0, 255, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(0, 242, 255, 0.1) 0%, transparent 40%);
+    filter: blur(80px);
     z-index: -1;
+    animation: backgroundBreathe 10s infinite alternate ease-in-out;
+}
+
+/* Işıkların hafifçe hareket etmesi için */
+@keyframes backgroundBreathe {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.1); opacity: 1; }
 }
 
 #chat-card {
